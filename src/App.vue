@@ -1,17 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Quiz 
+      :currentQuestion="questions"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Quiz from './components/Quiz.vue'
 
 export default {
   name: 'App',
+  data () {
+    return {
+      questions: '',
+      answers: null
+    }
+  },
   components: {
-    HelloWorld
+    Quiz
+  },
+  mounted () {
+      this.$http.get('https://opentdb.com/api.php?amount=10&category=15&difficulty=easy&type=multiple')
+      .then(response => {
+        return this.questions = response.data.results[0].question
+      })
   }
 }
 </script>
