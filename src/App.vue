@@ -15,6 +15,12 @@
     >
       next
     </button>
+    <br>
+    <button 
+      v-bind:class="questionIndex===quizzes.length-1? 'showing':'hiding'"
+    >
+      Submit
+    </button>
   </div>
 </template>
 
@@ -59,5 +65,13 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+#app .hiding {
+  display: none;
+}
+
+#app .showing {
+  display: block;
 }
 </style>
