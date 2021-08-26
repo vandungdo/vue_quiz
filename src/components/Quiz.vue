@@ -1,6 +1,16 @@
 <template>
   <div class="quiz">
       {{currentQuestion}}
+      <br>
+      <ul class="ul-no-bullets">
+        <li 
+          v-for="answer in currentAnswers"
+          :key="answer.id"
+        >
+          <input type="checkbox">
+          {{answer}}
+        </li>
+      </ul>
   </div>
 </template>
 
@@ -9,25 +19,16 @@ export default {
   name: 'Quiz',
   props: {
       currentQuestion: [],
-    //   currentAnswers: []
+      currentAnswers: []
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-} */
+  ul.ul-no-bullets {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
 </style>

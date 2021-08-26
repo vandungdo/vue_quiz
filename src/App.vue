@@ -1,8 +1,20 @@
 <template>
   <div id="app">
     <Quiz 
-      :currentQuestion="questions"
+ 
+      :currentQuestion="quizzes[questionIndex].question"
+      :currentAnswers="[...quizzes[questionIndex].incorrect_answers, quizzes[questionIndex].correct_answer]"
     />
+    <button
+      v-on:click="previousQuestion"
+    >
+      previous
+    </button>
+    <button
+      v-on:click="nextQuestion"
+    >
+      next
+    </button>
   </div>
 </template>
 
@@ -13,8 +25,8 @@ export default {
   name: 'App',
   data () {
     return {
-      questions: '',
-      answers: null
+      quizzes: [],
+      questionIndex: 0
     }
   },
   components: {
@@ -23,8 +35,18 @@ export default {
   mounted () {
       this.$http.get('https://opentdb.com/api.php?amount=10&category=15&difficulty=easy&type=multiple')
       .then(response => {
-        return this.questions = response.data.results[0].question
+        this.quizzes = response.data.results
+        console.log(this.quizzes)
+        
       })
+  },
+  methods: {
+    nextQuestion: function(){
+      this.questionIndex ++
+    },
+    previousQuestion: function(){
+      this.questionIndex --
+    }
   }
 }
 </script>
