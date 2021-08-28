@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Quiz 
- 
+      v-if="quizzes.length"
       :currentQuestion="quizzes[questionIndex].question"
       :currentAnswers="[...quizzes[questionIndex].incorrect_answers, quizzes[questionIndex].correct_answer]"
     />
